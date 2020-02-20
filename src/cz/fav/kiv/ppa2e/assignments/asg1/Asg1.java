@@ -1,12 +1,14 @@
 package cz.fav.kiv.ppa2e.assignments.asg1;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -18,46 +20,35 @@ public class Asg1 {
 	 * @param x value sought
 	 * @return true if x is in the data, otherwise false
 	 */
-	static boolean intervalSubdivision (int [] data, int x) {
+	public static boolean intervalSubdivision (int [] data, int x) {
 		int left = 0; // left interval boundary
 		int right = data.length - 1; // upper interval boundary
-		int mid = (left + right) / 2; // index in the middle of the interval
-		while (data [mid]!= x) { 
-			if (left == right) 
-				return (false);
-			// Now reduce the interval
-			if (data [mid]> x) 
+		while (left <= right) { 
+			int mid = (left + right) / 2;
+			if (data [mid] > x) 
 				right = mid - 1;
-			else 
+			else if (data [mid] < x)
 				left = mid + 1;
-			mid = (left + right) / 2;
-//			beginning of my correction
-			if (mid <= data.length - 1 
-					&& mid >= 0 
-					&& left <= data.length - 1
-					&& right >= 0 
-					)
-				continue;
 			else
-				return false;
-//			end of my correction
+				return true;
 		}
-		return true; //
+		return false;
 	}
 
 	public static void main(String [] args) {
-		int [] data = new int[] {1, 2, 3, 100};
-		int x = 120;
+		int [] data = new int[] {1, 3, 5, 41, 48, 52, 63, 71};
+		int x = 72;
 		long start = System.nanoTime();
 		boolean found = intervalSubdivision (data, x);
 		long stop = System.nanoTime();
-		System.out.println ("Interval subdivision finished in" + (stop) + "ns");
+		System.out.println ("Interval subdivision finished in " + (stop - start) + "ns");
 		System.out.println ("Number found:" + found);
-		data = arrayFromFile("files", "boh.txt");
+		data = arrayFromFile("res", "numbers.txt");
 		for (int i = 0; i < data.length; i++) {
 			System.out.println(data[i]);
 		}
 		System.out.println(sequentialSearch(new int[] {1,2,3}, 5));
+		arrayToFile("res", "written.txt", new int[] {1,2,3,4,5});
 	}
 	
 	public static int[] generateRandomIntegerArray (int minimalLength, int maximalLength) {
@@ -141,5 +132,30 @@ public class Asg1 {
 		    System.err.println(x);
 		}
 		return data;
+	}
+	
+	public static void arrayToFile (String path, String filename, int[] data) {
+		Path file = FileSystems.getDefault().getPath(path, filename);
+		try (BufferedWriter writer = Files.newBufferedWriter(
+				file, StandardOpenOption.CREATE)) {
+			for (int i = 0; i < data.length; i++) {
+				writer.write(data[i] + "\n");
+			}
+		} catch (IOException x) {
+		    System.err.format("IOException: %s%n", x);
+		}
+	}
+	
+	public static boolean isSorted (int[] data) {
+		int precedent = data[0];
+		for (int i = 1; i < data.length; i++) {
+			if (data[i] >= precedent) {
+				precedent = data[i];
+				continue;
+			}
+			else
+				return false;
+		}
+		return true;
 	}
 }
