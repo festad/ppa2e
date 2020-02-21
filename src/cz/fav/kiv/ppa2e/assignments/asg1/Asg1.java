@@ -49,6 +49,11 @@ public class Asg1 {
 		}
 		System.out.println(sequentialSearch(new int[] {1,2,3}, 5));
 		arrayToFile("res", "written.txt", new int[] {1,2,3,4,5});
+		
+		data = generateRandomIntegerArrayWithoutSorting(100, 1000); 
+		for (int j = 0; j < data.length; j++) {
+			System.out.println(data[j]);
+		}
 	}
 	
 	public static int[] generateRandomIntegerArray (int minimalLength, int maximalLength) {
@@ -96,6 +101,19 @@ public class Asg1 {
 			Arrays.sort(data);
 			return data;
 		}
+	 
+	 public static int[] generateRandomIntegerArrayWithoutSorting(int minimalLength, int maximalLength) {
+		 if (minimalLength > maximalLength) 
+				throw new IllegalArgumentException("minimal length > maximal length");
+		 int length = new Random().nextInt((maximalLength - minimalLength) + 1) + minimalLength;
+			int[] data = new int[length];
+			int precedent = 0;
+			for (int i = 0; i < data.length; i++) {
+				data[i] = new Random().nextInt(10) + 1 + precedent;
+				precedent = data[i];
+			}
+			return data;
+	 }
 	 
 	public static int nLinesInFile (String path, String filename) {
 		Path file = FileSystems.getDefault().getPath(path, filename);
