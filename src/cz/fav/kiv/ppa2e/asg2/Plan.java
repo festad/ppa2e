@@ -164,7 +164,7 @@ public class Plan {
 	}
 
 	public static void main(String[] args) {
-		Set<PlanEvent> events = readEventsFromFile("", "ssc.txt");
+		Set<PlanEvent> events = readEventsFromFile("res", "ssc.txt");
 		Set<Plan> plans = allPossibleSetsOfFive(events).stream()
 				.map(lot -> new Plan(lot))
 				.collect(Collectors.toSet());
