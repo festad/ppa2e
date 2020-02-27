@@ -4,20 +4,16 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.IllegalFormatException;
 import java.util.IllegalFormatWidthException;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 import java.util.StringTokenizer;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 
@@ -59,7 +55,7 @@ public class Plan {
 	public boolean isOk () {
 		boolean mathok = false;
 		boolean computerok = false;
-		if (anyDuplicate(plan.stream()
+		if (!anyDuplicate(plan.stream()
 				.filter(event -> event.getSubject().equals(Subject.math))
 				.mapToInt(PlanEvent::getDayOfWeek)
 				.toArray()) && 
@@ -67,7 +63,7 @@ public class Plan {
 				.filter(event -> event.getSubject().equals(Subject.math))
 				.count() >= MIN_MATH)
 			mathok = true;
-		if (anyDuplicate(plan.stream()
+		if (!anyDuplicate(plan.stream()
 				.filter(event -> event.getSubject().equals(Subject.computers))
 				.mapToInt(PlanEvent::getDayOfWeek)
 				.toArray()) && 
@@ -86,9 +82,16 @@ public class Plan {
 		 return false;
 	 }
 	
+	/**
+	 * IT WORKS ONLY FOR ARRAYS WITH ONLY POSITIVE NUMBERS
+	 * @param array
+	 * @return
+	 */
 	public static boolean anyDuplicate (int[] array) {
 		for (int i = 0; i < array.length; i++) {
-			if (sequentialSearch(array, i))
+			int[] tmp = array.clone();
+			tmp[i] = -1;
+			if (sequentialSearch(tmp, array[i]))
 				return true;
 		}
 		return false;

@@ -111,7 +111,7 @@ public class PlanEvent {
 
 	@Override
 	public String toString() {
-		return tutor + "\n" + subject + "\n" + dayOfWeek + "\n" + start + "\n" + end + "\n" + subject;
+		return tutor + "\n" + subject + "\n" + dayOfWeek + "\n" + start + "\n" + end;
 	}
 
 
