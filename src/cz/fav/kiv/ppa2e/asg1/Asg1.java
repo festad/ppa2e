@@ -1,4 +1,4 @@
-package cz.fav.kiv.ppa2e.assignments.asg1;
+package cz.fav.kiv.ppa2e.asg1;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
