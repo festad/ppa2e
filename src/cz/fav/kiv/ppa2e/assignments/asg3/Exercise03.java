@@ -19,5 +19,8 @@ public class Exercise03 {
 		System.out.println(qp.differentiate(0.5));
 		System.out.println("----------------------");
 		System.out.println(lf.differentiate(0.5));
+		System.out.println("----------------------");
+		GeneralPolynomial p = new GeneralPolynomial(new double[] {0,0,1});
+		System.out.println(p.differentiate(0.5));
 	}
 }
