@@ -13,13 +13,13 @@ public abstract class AbstractFunction implements IFunction {
 		double derivative = -1;
 		double difference = -1;
 		do {
-			System.out.println("h = " + d.getH());
+//			System.out.println("h = " + d.getH());
 			previous_derivative = d.differentiate(this, p);
-			System.out.println("previous derivative = " + previous_derivative);
+//			System.out.println("previous derivative = " + previous_derivative);
 			d.setH(d.getH()/2);
 			derivative = d.differentiate(this, p);
 			difference = Math.abs(derivative - previous_derivative);
-			System.out.println("difference: " + difference);
+//			System.out.println("difference: " + difference);
 		} while (difference >= epsilon);
 		return 	derivative;
 	}
