@@ -1,6 +1,6 @@
 package cz.fav.kiv.ppa2e.assignments.asg3;
 
-class LinearFunction implements IFunction{
+class LinearFunction extends AbstractFunction implements IFunction{
 	
 	private double k, q;
 	
@@ -16,5 +16,10 @@ class LinearFunction implements IFunction{
 	@Override // here the absent method derived from interface, to be implemented
 	public double valueAt(double p) {
 		return getValue(p);
+	}
+	
+	@Override
+	public double differentiate(double p) {
+		return k;
 	}
 }

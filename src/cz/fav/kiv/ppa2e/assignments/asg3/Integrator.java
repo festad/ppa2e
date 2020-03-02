@@ -1,7 +1,8 @@
 package cz.fav.kiv.ppa2e.assignments.asg3;
 
 class Integrator {
-	double delta;
+	
+	private double delta = IFunction.DELTA;
 	
 	double integrate(IFunction f, double a, double b) {
 		double result = 0;		

@@ -15,5 +15,9 @@ public class Exercise03 {
 		QuadraticPolynomial qp = new QuadraticPolynomial(1, 0, 0);
 		double quadratic_integral = integrator.integrate(qp, 0, 5);
 		System.out.println(quadratic_integral);
+		System.out.println("----------------------");
+		System.out.println(qp.differentiate(0.5));
+		System.out.println("----------------------");
+		System.out.println(lf.differentiate(0.5));
 	}
 }

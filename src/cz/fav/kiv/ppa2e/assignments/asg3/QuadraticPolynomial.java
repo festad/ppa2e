@@ -1,6 +1,6 @@
 package cz.fav.kiv.ppa2e.assignments.asg3;
 
-public class QuadraticPolynomial implements IFunction {
+public class QuadraticPolynomial extends AbstractFunction implements IFunction {
 
 	private double a;
 	private double b;
