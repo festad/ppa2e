@@ -1,4 +1,4 @@
-package cz.fav.kiv.ppa2e.asg2;
+package cz.fav.kiv.ppa2e.assignments.asg2;
 
 import java.util.HashSet;
 import java.util.Set;

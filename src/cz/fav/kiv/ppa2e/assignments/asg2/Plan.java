@@ -1,4 +1,4 @@
-package cz.fav.kiv.ppa2e.asg2;
+package cz.fav.kiv.ppa2e.assignments.asg2;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package cz.fav.kiv.ppa2e.asg1;
+package cz.fav.kiv.ppa2e.assignments.asg1;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -8,10 +8,10 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.Random;
 
-public class Asg1ReadFilesFromPortalWithInRangeQeries {
-public static void main(String[] args) {
+public class Asg1ReadFilesFromPortalWithCompletelyRandomQeries {
+	public static void main(String[] args) {
 		
-		int nrandoms = 50;
+		int nrandoms = 10000;
 		Path file = FileSystems.getDefault().getPath("res", "reading-from-portal.txt");
 		try (BufferedWriter writer = Files.newBufferedWriter(
 				file, StandardOpenOption.CREATE, StandardOpenOption.WRITE)) {
@@ -28,13 +28,11 @@ public static void main(String[] args) {
 				writer.write("Is it really sorted? " + is_sorted + "\n"
 						+ "Time required: " + isSortedEffort + "\n");
 				if (is_sorted) {
-					writer.write("Number of elements: " + data.length + "\n"
-							+ "Minimum value: " + data[0] + "\n"
-									+ "Maximum value: " + data[data.length - 1] + "\n");
+					writer.write("Number of elements: " + data.length + "\n");
 					long linear_time_sum = 0;
 					long subdivision_time_sum = 0;
 					for (int j = 0; j < nrandoms; j++) {
-						int random = new Random().nextInt((data[data.length - 1] - data[0])) + 1;
+						int random = new Random().nextInt();
 						long start_linear = System.nanoTime();
 						boolean linearLocation = Asg1.sequentialSearch(data, random);
 						long stop_linear = System.nanoTime();
