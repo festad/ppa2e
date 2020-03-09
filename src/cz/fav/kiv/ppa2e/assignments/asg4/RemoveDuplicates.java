@@ -61,8 +61,9 @@ public class RemoveDuplicates {
 					newResult[k] = result[k];
 				int index = i + 1; // index in target array
 //				added 1 to i
-				for (int k = i+2;k<result.length;k++){
-//				added 2 instead of 1 to i
+				for (int k = i+1;k<result.length;k++){
+//				added 2 instead of 1 to i 
+//				-> update: add 1 to i instead of 2
 					if (result[k]!=result[i]){
 						// not a duplicate
 						newResult[index] = result[k];
@@ -123,21 +124,34 @@ public class RemoveDuplicates {
 	
 	public static void main(String[] args)
 	{
-		int[] driver = new int[] {1,2,3,3,4,5,5};
+		int[] driver = new int[] {4,7,1,5,3,7,2};
 		System.out.println(Arrays.toString(removeDuplicates2(driver)));
 		System.out.println(Arrays.toString(removeDuplicates1(driver)));
 		System.out.println(Arrays.toString(removeDuplicates3(driver)));
 
-		
+		int c = 1;
 		int count = 30000;
 		int[] data = generateData(count);
-		
+		long start_1 = System.nanoTime();
 		int[] reducedData1 = removeDuplicates1(data);
+		long stop_1 = System.nanoTime();
+		System.out.println(String.format("Remove duplicates @%d -> %d", c, stop_1 - start_1));
+		c++;
+		long start_2 = System.nanoTime();
 		int[] reducedData2 = removeDuplicates2(data);	
+		long stop_2 = System.nanoTime();
+		System.out.println(String.format("Remove duplicates @%d -> %d", c, stop_2 - start_2));
+		c++;
+		long start_3 = System.nanoTime();
 		int[] reducedData3 = removeDuplicates3(data);
+		long stop_3 = System.nanoTime();
+		System.out.println(String.format("Remove duplicates @%d -> %d", c, stop_3 - start_3));
+		
 		System.out.println(Arrays.equals(reducedData1, reducedData2));
 		System.out.println(Arrays.equals(reducedData2, reducedData3));
 		System.out.println(Arrays.equals(reducedData1, reducedData3));
+		
+		
 		System.out.println("All done.");
 	}
 }
