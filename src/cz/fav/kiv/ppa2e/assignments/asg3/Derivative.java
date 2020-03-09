@@ -10,6 +10,9 @@ public class Derivative extends AbstractFunction {
 		this.function = function;
 	}
 	
+	/**
+	 * 
+	 */
 	@Override
 	public double valueAt(double p) {
 		return function.differentiate(p);
