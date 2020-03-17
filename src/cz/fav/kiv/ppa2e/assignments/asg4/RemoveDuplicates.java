@@ -32,8 +32,10 @@ public class RemoveDuplicates {
 		int[] result = data;
 		for (int i = 0;i<result.length;i++){
 			for (int j = i+1;j<result.length;j++){
-				if (result[j] == result[i])
+				if (result[j] == result[i]) {
 					result = removeItem(result, j);
+					j--;
+				}
 			}
 		}
 		return result;
@@ -83,7 +85,7 @@ public class RemoveDuplicates {
 	 */
 	static int[] removeDuplicates3(int[] data){
 		// first, find out how many unique numbers we have
-		boolean[] encountered = new boolean[1000000];
+		boolean[] encountered = new boolean[data.length];
 		int count = 0; // count of unique numbers
 		for (int i = 0;i<data.length;i++){
 			if (!encountered[data[i]]){
@@ -94,7 +96,7 @@ public class RemoveDuplicates {
 		}
 		// in count we have the count of unique numbers
 		// we use the array encountered once more in the same way
-		encountered = new boolean[1000000];
+		encountered = new boolean[data.length];
 		int[] result = new int[count];
 		int index = 0;
 		for (int i = 0;i<data.length;i++){
@@ -124,13 +126,13 @@ public class RemoveDuplicates {
 	
 	public static void main(String[] args)
 	{
-		int[] driver = new int[] {4,7,1,5,3,7,2};
+		int[] driver = new int[] {4,4,4,7,1,4,5,3,7,2,2,2};
 		System.out.println(Arrays.toString(removeDuplicates2(driver)));
 		System.out.println(Arrays.toString(removeDuplicates1(driver)));
 		System.out.println(Arrays.toString(removeDuplicates3(driver)));
 
 		int c = 1;
-		int count = 30000;
+		int count = 170000;
 		int[] data = generateData(count);
 		long start_1 = System.nanoTime();
 		int[] reducedData1 = removeDuplicates1(data);

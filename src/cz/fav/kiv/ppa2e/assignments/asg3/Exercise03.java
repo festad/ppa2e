@@ -51,5 +51,10 @@ public class Exercise03 {
 		for (double x = 0;x<Math.PI*2;x+=0.3) {
 		  System.out.println(cos.valueAt(x));
 		}
+		System.out.println("======================");
+		IFunction polynom = new GeneralPolynomial(new double[] {3,0,0});
+		IFunction derivative = new Derivative(polynom);
+		System.out.println(derivative.valueAt(1));
+
 	}
 }
