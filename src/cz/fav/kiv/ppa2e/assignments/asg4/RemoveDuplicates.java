@@ -5,6 +5,8 @@ import java.util.Random;
 
 public class RemoveDuplicates {
 	
+	public static final int MAX_V = 100_000;
+	
 	/**
 	 * Removes an item at index i from an array
 	 * @param input array of data
@@ -85,7 +87,7 @@ public class RemoveDuplicates {
 	 */
 	static int[] removeDuplicates3(int[] data){
 		// first, find out how many unique numbers we have
-		boolean[] encountered = new boolean[data.length];
+		boolean[] encountered = new boolean[MAX_V];
 		int count = 0; // count of unique numbers
 		for (int i = 0;i<data.length;i++){
 			if (!encountered[data[i]]){
@@ -96,7 +98,7 @@ public class RemoveDuplicates {
 		}
 		// in count we have the count of unique numbers
 		// we use the array encountered once more in the same way
-		encountered = new boolean[data.length];
+		encountered = new boolean[MAX_V];
 		int[] result = new int[count];
 		int index = 0;
 		for (int i = 0;i<data.length;i++){
@@ -120,39 +122,94 @@ public class RemoveDuplicates {
 		int[] result = new int[count];
 		Random r = new Random();
 		for (int i = 0;i<result.length;i++)
-			result[i] = r.nextInt(100000);
+			result[i] = r.nextInt(MAX_V);
 		return result;
+	}
+	
+	public static int rem1_more_than_s(int nano_seconds) 
+	{
+		int count = 40_000;
+		do 
+		{
+			int[] data = generateData(count);
+			long start_1 = System.nanoTime();
+			removeDuplicates1(data);
+			long stop_1 = System.nanoTime();
+			System.out.println(String.format("Remove duplicates with %d -> %d", count, stop_1 - start_1));
+			if (stop_1 - start_1 >= nano_seconds)
+				return count;
+			count += 10;
+		}
+		while (true);
+	}
+	
+	public static int rem2_more_than_s(long l) 
+	{
+		int count = 150_000;
+		do 
+		{
+			int[] data = generateData(count);
+			long start_1 = System.nanoTime();
+			removeDuplicates2(data);
+			long stop_1 = System.nanoTime();
+			System.out.println(String.format("Remove duplicates with %d -> %d", count, stop_1 - start_1));
+			if (stop_1 - start_1 >= l)
+				return count;
+			count += 10_000;
+		}
+		while (true);
+	}
+	
+	public static int rem3_more_than_s(int nano_seconds) 
+	{
+		int count = 700_010_000;
+		do 
+		{
+			int[] data = generateData(count);
+			long start_1 = System.nanoTime();
+			removeDuplicates3(data);
+			long stop_1 = System.nanoTime();
+			System.out.println(String.format("Remove duplicates with %d -> %d", count, stop_1 - start_1));
+			if (stop_1 - start_1 >= nano_seconds)
+				return count;
+			count += 10;
+		}
+		while (true);
 	}
 	
 	public static void main(String[] args)
 	{
-		int[] driver = new int[] {4,4,4,7,1,4,5,3,7,2,2,2};
-		System.out.println(Arrays.toString(removeDuplicates2(driver)));
-		System.out.println(Arrays.toString(removeDuplicates1(driver)));
-		System.out.println(Arrays.toString(removeDuplicates3(driver)));
-
-		int c = 1;
-		int count = 170000;
-		int[] data = generateData(count);
-		long start_1 = System.nanoTime();
-		int[] reducedData1 = removeDuplicates1(data);
-		long stop_1 = System.nanoTime();
-		System.out.println(String.format("Remove duplicates @%d -> %d", c, stop_1 - start_1));
-		c++;
-		long start_2 = System.nanoTime();
-		int[] reducedData2 = removeDuplicates2(data);	
-		long stop_2 = System.nanoTime();
-		System.out.println(String.format("Remove duplicates @%d -> %d", c, stop_2 - start_2));
-		c++;
-		long start_3 = System.nanoTime();
-		int[] reducedData3 = removeDuplicates3(data);
-		long stop_3 = System.nanoTime();
-		System.out.println(String.format("Remove duplicates @%d -> %d", c, stop_3 - start_3));
+//		int[] driver = new int[] {4,4,4,7,1,4,5,3,7,2,2,2};
+//		System.out.println(Arrays.toString(removeDuplicates2(driver)));
+//		System.out.println(Arrays.toString(removeDuplicates1(driver)));
+//		System.out.println(Arrays.toString(removeDuplicates3(driver)));
+////
+//		int c = 1;
+//		int count = 200_000;
+//		int[] data = generateData(count);
+//		long start_1 = System.nanoTime();
+//		int[] reducedData1 = removeDuplicates1(data);
+//		long stop_1 = System.nanoTime();
+//		System.out.println(String.format("Remove duplicates @%d -> %d", c, stop_1 - start_1));
+//		c++;
+//		long start_2 = System.nanoTime();
+//		int[] reducedData2 = removeDuplicates2(data);	
+//		long stop_2 = System.nanoTime();
+//		System.out.println(String.format("Remove duplicates @%d -> %d", c, stop_2 - start_2));
+//		c++;
+//		long start_3 = System.nanoTime();
+//		int[] reducedData3 = removeDuplicates3(data);
+//		long stop_3 = System.nanoTime();
+//		System.out.println(String.format("Remove duplicates @%d -> %d", c, stop_3 - start_3));
+//		
+//		System.out.println(Arrays.equals(reducedData1, reducedData2));
+//		System.out.println(Arrays.equals(reducedData2, reducedData3));
+//		System.out.println(Arrays.equals(reducedData1, reducedData3));
 		
-		System.out.println(Arrays.equals(reducedData1, reducedData2));
-		System.out.println(Arrays.equals(reducedData2, reducedData3));
-		System.out.println(Arrays.equals(reducedData1, reducedData3));
-		
+//		System.out.println(rem1_more_than_s(1_000_000_000)); // 50500
+//		System.out.println(rem2_more_than_s(1_000_000_000)); // 65900
+//		System.out.println(rem3_more_than_s(1_000_000_000)); // 700_012_000
+		System.out.println(rem2_more_than_s(10_000_000_000L)); // 200_000
 		
 		System.out.println("All done.");
 	}
