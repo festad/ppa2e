@@ -155,7 +155,7 @@ public class RemoveDuplicates {
 			System.out.println(String.format("Remove duplicates with %d -> %d", count, stop_1 - start_1));
 			if (stop_1 - start_1 >= l)
 				return count;
-			count += 10_000;
+			count += 5_000;
 		}
 		while (true);
 	}
@@ -209,7 +209,38 @@ public class RemoveDuplicates {
 //		System.out.println(rem1_more_than_s(1_000_000_000)); // 50500
 //		System.out.println(rem2_more_than_s(1_000_000_000)); // 65900
 //		System.out.println(rem3_more_than_s(1_000_000_000)); // 700_012_000
-		System.out.println(rem2_more_than_s(10_000_000_000L)); // 200_000
+//		System.out.println(rem2_more_than_s(10_000_000_000L)); // 200_000
+		
+		int step = (200_000 - 1000) / 10;
+		int count = 1000;
+		System.out.println(String.format(""
+				+ "%20s | %20s | %20s | %20s | %20s | %20s | %20s", 
+				      "n", "t1", "a1", "t2", "a2", "t3", "a3"));
+		do
+		{
+			int[] data = generateData(count);
+			
+			long start_1 = System.nanoTime();
+			removeDuplicates1(data);
+			long stop_1 = System.nanoTime();
+			double delta1 = (stop_1 - start_1);
+			
+			long start_2 = System.nanoTime();
+			removeDuplicates2(data);	
+			long stop_2 = System.nanoTime();
+			double delta2 = (stop_2 - start_2);
+			
+			long start_3 = System.nanoTime();
+			removeDuplicates3(data);
+			long stop_3 = System.nanoTime();
+			double delta3 = (stop_3 - start_3);
+						
+			System.out.println(String.format(""
+					+ "%20d | %20f | %20f | %20f | %20f | %20f | %20f", 
+					count, delta1, delta1/delta1, delta2, delta1/delta2, delta3, delta1/delta3));
+			count += step;
+		} 
+		while (count <= 200_000);
 		
 		System.out.println("All done.");
 	}
