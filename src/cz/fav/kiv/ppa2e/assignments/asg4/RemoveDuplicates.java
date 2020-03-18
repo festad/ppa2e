@@ -126,53 +126,50 @@ public class RemoveDuplicates {
 		return result;
 	}
 	
-	public static int rem1_more_than_s(int nano_seconds) 
+	public static int rem1_more_than_s(long nano_seconds, int count) 
 	{
-		int count = 40_000;
 		do 
 		{
 			int[] data = generateData(count);
 			long start_1 = System.nanoTime();
 			removeDuplicates1(data);
 			long stop_1 = System.nanoTime();
-			System.out.println(String.format("Remove duplicates with %d -> %d", count, stop_1 - start_1));
+			System.out.println(String.format("Remove duplicates 1 with %d -> %d", count, stop_1 - start_1));
 			if (stop_1 - start_1 >= nano_seconds)
 				return count;
-			count += 10;
+			count += 1_000;
 		}
 		while (true);
 	}
 	
-	public static int rem2_more_than_s(long l) 
+	public static int rem2_more_than_s(long l, int count) 
 	{
-		int count = 150_000;
 		do 
 		{
 			int[] data = generateData(count);
 			long start_1 = System.nanoTime();
 			removeDuplicates2(data);
 			long stop_1 = System.nanoTime();
-			System.out.println(String.format("Remove duplicates with %d -> %d", count, stop_1 - start_1));
+			System.out.println(String.format("Remove duplicates 2 with %d -> %d", count, stop_1 - start_1));
 			if (stop_1 - start_1 >= l)
 				return count;
-			count += 5_000;
+			count += 1_000;
 		}
 		while (true);
 	}
 	
-	public static int rem3_more_than_s(int nano_seconds) 
+	public static int rem3_more_than_s(long nano_seconds, int count) 
 	{
-		int count = 700_010_000;
 		do 
 		{
 			int[] data = generateData(count);
 			long start_1 = System.nanoTime();
 			removeDuplicates3(data);
 			long stop_1 = System.nanoTime();
-			System.out.println(String.format("Remove duplicates with %d -> %d", count, stop_1 - start_1));
+			System.out.println(String.format("Remove duplicates 3 with %d -> %d", count, stop_1 - start_1));
 			if (stop_1 - start_1 >= nano_seconds)
 				return count;
-			count += 10;
+			count += 1_000;
 		}
 		while (true);
 	}
@@ -206,13 +203,15 @@ public class RemoveDuplicates {
 //		System.out.println(Arrays.equals(reducedData2, reducedData3));
 //		System.out.println(Arrays.equals(reducedData1, reducedData3));
 		
-//		System.out.println(rem1_more_than_s(1_000_000_000)); // 50500
-//		System.out.println(rem2_more_than_s(1_000_000_000)); // 65900
-//		System.out.println(rem3_more_than_s(1_000_000_000)); // 700_012_000
-//		System.out.println(rem2_more_than_s(10_000_000_000L)); // 200_000
-		
-		int step = (200_000 - 1000) / 10;
-		int count = 1000;
+		System.out.println(rem1_more_than_s(1_000_000_000, 40_000));
+		System.out.println(rem2_more_than_s(1_000_000_000, 50_000)); 
+		System.out.println(rem3_more_than_s(1_000_000_000, 700_000_000)); 
+		int upperbound = rem1_more_than_s(10_000_000_000L, 145_000);
+		System.out.println(upperbound);
+		System.out.println(); // 200_000
+		int lowerbound = 1000;
+		int step = (upperbound - lowerbound) / 10;
+		int count = lowerbound;
 		System.out.println(String.format(""
 				+ "%20s | %20s | %20s | %20s | %20s | %20s | %20s", 
 				      "n", "t1", "a1", "t2", "a2", "t3", "a3"));
@@ -240,7 +239,7 @@ public class RemoveDuplicates {
 					count, delta1, delta1/delta1, delta2, delta1/delta2, delta3, delta1/delta3));
 			count += step;
 		} 
-		while (count <= 200_000);
+		while (count <= upperbound);
 		
 		System.out.println("All done.");
 	}
