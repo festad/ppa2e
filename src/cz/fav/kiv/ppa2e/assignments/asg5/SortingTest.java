@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class SortingTest {
     public static void main(String[] args) {
-        ISortingAlgorithm algorithm = new InsertSort();
+        ISortingAlgorithm algorithm = new MergeSort();
         if (testCorrectness(algorithm)) {
             testCounts(algorithm);
         }
@@ -32,33 +32,40 @@ public class SortingTest {
             System.out.println("------------------------------------------------------------\n" +
                     "And if the array is already sorted, how many comparisons?\n" +
                     "@ " + algorithm.comparesInLastSort());
-            System.out.println("=============================================================\n");
+            System.out.println("=============================================================");
+            data = generateData(length);
+            long start = System.nanoTime();
+            algorithm.only_sort(data);
+            long end = System.nanoTime();
+            long delta = end - start;
+            System.out.println("Pure sorting required:                      " + delta + " nanoseconds");
+            start = System.nanoTime();
+            algorithm.only_sort(data);
+            end = System.nanoTime();
+            delta = end - start;
+            System.out.println("Pure sorting already sorted array required: " + delta + " nanoseconds");
+            System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         }
     }
 
     private static boolean testCorrectness(ISortingAlgorithm algorithm) {
         for (int i = 0; i<100; i++) {
             int[] data = generateData(100);
-//            data = new int[] {1,4,5,3,3,2,7,6,8,8};
+            int[] only_sort_data = data.clone();
             int[] dataCopy = data.clone();
             for(int j = 0; j<data.length;j++) {
 //                i should use j instead of i to compare values
-                System.out.println(data[j] + " => " + dataCopy[j]);
                 if (data[j] != dataCopy[j]) {
                     System.out.println("Algorithm failed before even starting, terminating.");
                     return false;
                 }
             }
             algorithm.sort(data);
+            algorithm.only_sort(only_sort_data);
             Arrays.sort(dataCopy);
-            System.out.println("-----------------");
-            for (int j = 0; j < data.length; j++) {
-                System.out.println(data[j] + " => " + dataCopy[j]);
-            }
-            System.out.println("=====================");
             for (int j = 0; j < data.length; j++) {
 //                i should use j instead of i to compare values
-                if (data[j] != dataCopy[j]) {
+                if (data[j] != dataCopy[j] || data[j] != only_sort_data[j] || dataCopy[j] != only_sort_data[j]) {
                     System.out.println("Algorithm failed, terminating.");
                     return false;
                 }

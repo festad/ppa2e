@@ -1,6 +1,6 @@
 package cz.fav.kiv.ppa2e.assignments.asg5;
 
-public class InsertSort extends ASortingAlgorithm {
+public class InsertSort extends ASortingAlgorithm implements ISortingAlgorithm {
 
 
     public void sort(int[] data) {
@@ -18,6 +18,19 @@ public class InsertSort extends ASortingAlgorithm {
                 j--;
             }
 //            data[j+1] = v;         int v = data[i];
+        }
+    }
+
+    @Override
+    public void only_sort(int[] data) {
+        for (int i = 1; i<data.length; i++) {
+            int j = i;
+            while(j > 0  && (data[j-1] > data[j])) {
+                int tmp = data[j - 1];
+                data[j - 1] = data[j];
+                data[j] = tmp;
+                j--;
+            }
         }
     }
 
