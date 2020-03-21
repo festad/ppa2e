@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class SortingTest {
     public static void main(String[] args) {
-        ISortingAlgorithm algorithm = new QuickSort();
+        ISortingAlgorithm algorithm = new InsertSort();
         if (testCorrectness(algorithm)) {
             testCounts(algorithm);
         }
@@ -16,10 +16,11 @@ public class SortingTest {
         int MAX_LENGTH = 100000;
         int TEST_COUNT = 100;
         for (int length = MIN_LENGTH;length<MAX_LENGTH;length*=2) {
+            int[] data = null;
             int minComp = Integer.MAX_VALUE;
             int maxComp = 0;
             for (int test = 0;test<TEST_COUNT;test++) {
-                int[] data = generateData(length);
+                data = generateData(length);
                 algorithm.sort(data);
                 if (algorithm.comparesInLastSort()>maxComp)
                     maxComp = algorithm.comparesInLastSort();
@@ -27,6 +28,11 @@ public class SortingTest {
                     minComp = algorithm.comparesInLastSort();
             }
             System.out.println("Length: " + length + ", Min:" + minComp + ", Max:" + maxComp);
+            algorithm.sort(data);
+            System.out.println("------------------------------------------------------------\n" +
+                    "And if the array is already sorted, how many comparisons?\n" +
+                    "@ " + algorithm.comparesInLastSort());
+            System.out.println("=============================================================\n");
         }
     }
 
