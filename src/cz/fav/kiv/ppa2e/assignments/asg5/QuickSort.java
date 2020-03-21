@@ -30,8 +30,7 @@ public class QuickSort extends ASortingAlgorithm implements ISortingAlgorithm {
         return i+1;
     }
 
-    private int partition(int[] arr, int low, int high)
-    {
+    private int partition(int[] arr, int low, int high) {
         int pivot = arr[high];
         int i = (low - 1);
         for (int j = low; j < high; j++) {
