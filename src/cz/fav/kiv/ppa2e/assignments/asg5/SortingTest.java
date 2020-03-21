@@ -5,12 +5,10 @@ import java.util.Random;
 
 public class SortingTest {
     public static void main(String[] args) {
-        ISortingAlgorithm algorithm = new InsertSort();
-
+        ISortingAlgorithm algorithm = new QuickSort();
         if (testCorrectness(algorithm)) {
             testCounts(algorithm);
         }
-
     }
 
     private static void testCounts(ISortingAlgorithm algorithm) {
@@ -47,10 +45,11 @@ public class SortingTest {
             }
             algorithm.sort(data);
             Arrays.sort(dataCopy);
-            System.out.println("------------");
+            System.out.println("-----------------");
             for (int j = 0; j < data.length; j++) {
                 System.out.println(data[j] + " => " + dataCopy[j]);
             }
+            System.out.println("=====================");
             for (int j = 0; j < data.length; j++) {
 //                i should use j instead of i to compare values
                 if (data[j] != dataCopy[j]) {
@@ -66,9 +65,8 @@ public class SortingTest {
     private static int[] generateData(int c) {
         int[] result = new int[c];
         Random rnd = new Random();
-        for (int i = 0;i<c;i++)
+        for (int i = 0; i<c; i++)
             result[i] = rnd.nextInt(c);
         return result;
     }
-
 }

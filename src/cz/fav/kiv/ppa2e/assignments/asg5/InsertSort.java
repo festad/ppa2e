@@ -1,12 +1,7 @@
 package cz.fav.kiv.ppa2e.assignments.asg5;
 
-public class InsertSort implements ISortingAlgorithm {
-    int compares = 0;
+public class InsertSort extends ASortingAlgorithm {
 
-    boolean greaterThan(int[] data, int i, int v) {
-        compares++;
-        return data[i]>v;
-    }
 
     public void sort(int[] data) {
         compares = 0;
@@ -26,7 +21,4 @@ public class InsertSort implements ISortingAlgorithm {
         }
     }
 
-    public int comparesInLastSort() {
-        return compares;
-    }
 }
