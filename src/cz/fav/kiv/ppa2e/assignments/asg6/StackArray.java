@@ -42,6 +42,10 @@ public abstract class StackArray implements IStringStack {
 		  freeIndex--;
 	  }  
 	  
+	  public boolean isEmpty() {
+		  return freeIndex == 0;
+	  }
+	  
 	  public String toString() {
 		  int i = freeIndex - 1;
 		  StringBuilder  sb = new StringBuilder();

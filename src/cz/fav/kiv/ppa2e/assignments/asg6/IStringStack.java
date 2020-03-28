@@ -24,4 +24,6 @@ public interface IStringStack {
    */
   void removeLast() throws Exception;
   
+  boolean isEmpty();
+  
 }
