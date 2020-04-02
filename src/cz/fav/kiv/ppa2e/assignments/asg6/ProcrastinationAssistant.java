@@ -33,7 +33,7 @@ class ProcrastinationAssistant {
   }
   
   private static void testStack(IStringStack stack) throws Exception {
-	  int n_data = 10_000;
+	  int n_data = 100_000;
 	  String[] array = new String[n_data];
 	  
 	  for (int i = 0; i < n_data; i++) {

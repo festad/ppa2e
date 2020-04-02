@@ -1,6 +1,6 @@
 package cz.fav.kiv.ppa2e.assignments.asg7;
 
-public class FreeOperator {
+public class FreeOperator extends CallEvent {
 	
 	String name;
 	int time;

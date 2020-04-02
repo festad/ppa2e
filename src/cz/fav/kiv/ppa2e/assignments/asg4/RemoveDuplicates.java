@@ -181,65 +181,65 @@ public class RemoveDuplicates {
 //		System.out.println(Arrays.toString(removeDuplicates1(driver)));
 //		System.out.println(Arrays.toString(removeDuplicates3(driver)));
 ////
-//		int c = 1;
-//		int count = 200_000;
-//		int[] data = generateData(count);
-//		long start_1 = System.nanoTime();
-//		int[] reducedData1 = removeDuplicates1(data);
-//		long stop_1 = System.nanoTime();
-//		System.out.println(String.format("Remove duplicates @%d -> %d", c, stop_1 - start_1));
-//		c++;
-//		long start_2 = System.nanoTime();
-//		int[] reducedData2 = removeDuplicates2(data);	
-//		long stop_2 = System.nanoTime();
-//		System.out.println(String.format("Remove duplicates @%d -> %d", c, stop_2 - start_2));
-//		c++;
-//		long start_3 = System.nanoTime();
-//		int[] reducedData3 = removeDuplicates3(data);
-//		long stop_3 = System.nanoTime();
-//		System.out.println(String.format("Remove duplicates @%d -> %d", c, stop_3 - start_3));
-//		
-//		System.out.println(Arrays.equals(reducedData1, reducedData2));
-//		System.out.println(Arrays.equals(reducedData2, reducedData3));
-//		System.out.println(Arrays.equals(reducedData1, reducedData3));
+		int c = 1;
+		int count = 200_000;
+		int[] data = generateData(count);
+		long start_1 = System.nanoTime();
+		int[] reducedData1 = removeDuplicates1(data);
+		long stop_1 = System.nanoTime();
+		System.out.println(String.format("Remove duplicates @%d -> %d", c, stop_1 - start_1));
+		c++;
+		long start_2 = System.nanoTime();
+		int[] reducedData2 = removeDuplicates2(data);	
+		long stop_2 = System.nanoTime();
+		System.out.println(String.format("Remove duplicates @%d -> %d", c, stop_2 - start_2));
+		c++;
+		long start_3 = System.nanoTime();
+		int[] reducedData3 = removeDuplicates3(data);
+		long stop_3 = System.nanoTime();
+		System.out.println(String.format("Remove duplicates @%d -> %d", c, stop_3 - start_3));
 		
-		System.out.println(rem1_more_than_s(1_000_000_000, 40_000));
-		System.out.println(rem2_more_than_s(1_000_000_000, 50_000)); 
-		System.out.println(rem3_more_than_s(1_000_000_000, 700_000_000)); 
-		int upperbound = rem1_more_than_s(10_000_000_000L, 145_000);
-		System.out.println(upperbound);
-		System.out.println(); // 200_000
-		int lowerbound = 1000;
-		int step = (upperbound - lowerbound) / 10;
-		int count = lowerbound;
-		System.out.println(String.format(""
-				+ "%20s | %20s | %20s | %20s | %20s | %20s | %20s", 
-				      "n", "t1", "a1", "t2", "a2", "t3", "a3"));
-		do
-		{
-			int[] data = generateData(count);
-			
-			long start_1 = System.nanoTime();
-			removeDuplicates1(data);
-			long stop_1 = System.nanoTime();
-			double delta1 = (stop_1 - start_1);
-			
-			long start_2 = System.nanoTime();
-			removeDuplicates2(data);	
-			long stop_2 = System.nanoTime();
-			double delta2 = (stop_2 - start_2);
-			
-			long start_3 = System.nanoTime();
-			removeDuplicates3(data);
-			long stop_3 = System.nanoTime();
-			double delta3 = (stop_3 - start_3);
-						
-			System.out.println(String.format(""
-					+ "%20d | %20f | %20f | %20f | %20f | %20f | %20f", 
-					count, delta1, delta1/delta1, delta2, delta1/delta2, delta3, delta1/delta3));
-			count += step;
-		} 
-		while (count <= upperbound);
+		System.out.println(Arrays.equals(reducedData1, reducedData2));
+		System.out.println(Arrays.equals(reducedData2, reducedData3));
+		System.out.println(Arrays.equals(reducedData1, reducedData3));
+//		
+//		System.out.println(rem1_more_than_s(1_000_000_000, 40_000));
+//		System.out.println(rem2_more_than_s(1_000_000_000, 50_000)); 
+//		System.out.println(rem3_more_than_s(1_000_000_000, 700_000_000)); 
+//		int upperbound = rem1_more_than_s(10_000_000_000L, 145_000);
+//		System.out.println(upperbound);
+//		System.out.println(); // 200_000
+//		int lowerbound = 1000;
+//		int step = (upperbound - lowerbound) / 10;
+//		int count = lowerbound;
+//		System.out.println(String.format(""
+//				+ "%20s | %20s | %20s | %20s | %20s | %20s | %20s", 
+//				      "n", "t1", "a1", "t2", "a2", "t3", "a3"));
+//		do
+//		{
+//			int[] data = generateData(count);
+//			
+//			long start_1 = System.nanoTime();
+//			removeDuplicates1(data);
+//			long stop_1 = System.nanoTime();
+//			double delta1 = (stop_1 - start_1);
+//			
+//			long start_2 = System.nanoTime();
+//			removeDuplicates2(data);	
+//			long stop_2 = System.nanoTime();
+//			double delta2 = (stop_2 - start_2);
+//			
+//			long start_3 = System.nanoTime();
+//			removeDuplicates3(data);
+//			long stop_3 = System.nanoTime();
+//			double delta3 = (stop_3 - start_3);
+//						
+//			System.out.println(String.format(""
+//					+ "%20d | %20f | %20f | %20f | %20f | %20f | %20f", 
+//					count, delta1, delta1/delta1, delta2, delta1/delta2, delta3, delta1/delta3));
+//			count += step;
+//		} 
+//		while (count <= upperbound);
 		
 		System.out.println("All done.");
 	}
