@@ -15,6 +15,8 @@ class Dispatcher {
 	private String unfortunate_number = null;
 	private String operator_answering_unfortunate_number = null;
 	
+	boolean append_from_now_on = false;
+	
 	public Dispatcher() {
 		this.callerQueue = new ObjectQueue();
 		this.operatorQueue = new ObjectQueue();
@@ -32,11 +34,15 @@ class Dispatcher {
 		boolean procede = true;
 		if (callerQueue.isEmpty()) {
 			System.out.println("Queue of callers is empty");
+			if (!append_from_now_on)
+				clean_file_to_write();
 			Utility.writeContent(path, w_filename, "Queue of callers is empty", "append");
 			procede = false;
 		}
 		if (operatorQueue.isEmpty()) {
 			System.out.println("Queue of operators is empty");
+			if (!append_from_now_on)
+				clean_file_to_write();
 			Utility.writeContent(path, w_filename, "Queue of opeartors is empty", "append");
 			procede = false;
 		}
@@ -51,9 +57,13 @@ class Dispatcher {
 	
 	private void assignCall(IncomingCall call, FreeOperator operator) {
 		System.out.println(operator.name + " is answering to the call from +420 " + call.callingNumber);
+		if (!append_from_now_on)
+			clean_file_to_write();
 		Utility.writeContent(path, w_filename, operator.name + " is answering to the call from +420 " + call.callingNumber, "append");
 		int wait = operator.time - call.time;
 		System.out.println("The caller has waited for " + Math.max(0, wait) + " seconds.");
+		if (!append_from_now_on)
+			clean_file_to_write();
 		Utility.writeContent(path, w_filename, "The caller has waited for " + Math.max(0, wait) + " seconds.", "append");
 		if (wait >= unfortunate_number_wait) {
 			unfortunate_number_wait = wait;
@@ -97,6 +107,11 @@ class Dispatcher {
 		+ unfortunate_number + " who was answered by " 
 				+ operator_answering_unfortunate_number + " after " 
 		+ unfortunate_number_wait + " seconds!" );
+	}
+	
+	private void clean_file_to_write() {
+		Utility.writeContent(path, w_filename, "", "overwrite");
+		append_from_now_on = true;
 	}
 	
 }

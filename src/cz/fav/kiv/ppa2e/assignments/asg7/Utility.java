@@ -43,7 +43,11 @@ public class Utility {
 	
 	public static void main(String[] args) {
 		readTokens(readContent("res", "callCentrum.txt"));
-		writeContent("res", "dispatch.txt", "czesc", "append");
+		writeContent("res", "dispatching.txt", "czesc", "create");
+	}
+	
+	public static boolean fileEmpty(String path, String filename) {
+		return readContent(path, filename) == "";
 	}
 	
 	public static void writeContent(String path, String filename, String content, String mode) {
@@ -57,9 +61,17 @@ public class Utility {
 			    System.err.format("IOException: %s%n", x);
 			}
 			break;
+		case "overwrite":
+			try (BufferedWriter writer = Files.newBufferedWriter(
+					file, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)) {
+					writer.write(content + "\n");
+			} catch (IOException x) {
+			    System.err.format("IOException: %s%n", x);
+			}
+			break;
 		case "create":
 			try (BufferedWriter writer = Files.newBufferedWriter(
-					file, StandardOpenOption.CREATE)) {
+					file, StandardOpenOption.CREATE_NEW)) {
 					writer.write(content + "\n");
 			} catch (IOException x) {
 			    System.err.format("IOException: %s%n", x);
