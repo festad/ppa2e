@@ -1,6 +1,6 @@
 package cz.fav.kiv.ppa2e.assignments.asg9;
 
-class HashTable {
+abstract class HashTable {
 	Entry[] data;
 	int[] collisions;
 	
@@ -34,9 +34,11 @@ class HashTable {
 		return -1;
 	}
 	
-	int getHashCode(String s){
-		return Math.abs(s.hashCode() % data.length);
+	public boolean isThere(String key) {
+		return get(key) == -1 ? false : true;
 	}
+	
+	abstract int getHashCode(String s);
 	
 	public String toString() {
 		StringBuffer b = new StringBuffer();
